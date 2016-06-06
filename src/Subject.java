@@ -35,13 +35,15 @@ public class Subject {
             preparedStatement.setInt(1,task_id);
             preparedStatement.setInt(2,subject_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            subject_title = resultSet.getString("subject_title");
-            subject_content = resultSet.getString("subject_content");
-            subject_type = resultSet.getInt("subject_type");
-
+            if(resultSet.next()) {
+                this.task_id = resultSet.getInt("task_id");
+                this.subject_id = resultSet.getInt("subject_id");
+                this.subject_title = resultSet.getString("subject_title");
+                this.subject_content = resultSet.getString("subject_content");
+                this.subject_type = resultSet.getInt("subject_type");
+            }
             /**
-             * 创建CHOICE数组对象,从数据库得到CHOICE数
+             * 从数据库得到CHOICE数,创建CHOICE数组对象
              */
             preparedStatement = connection.prepareStatement("SELECT COUNT(*) c FROM Choice WHERE task_id = ? AND subject_id = ?");
             preparedStatement.setInt(1,task_id);
@@ -64,8 +66,6 @@ public class Subject {
                 e.printStackTrace();
             }
         }
-        this.task_id = task_id;
-        this.subject_id = subject_id;
     }
 
     /**

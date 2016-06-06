@@ -1,4 +1,5 @@
-<!DOCTYPE HTML>
+<%@ page contentType="text/html;charset=GBK" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title>Home</title>
@@ -56,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <div id="wrapper">
      <!-- Navigation -->
-        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0 ; background-color: #FF0004">
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0 ; background-color:">
             <div class="navbar-header" >
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -64,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Error !</a>
+                <a class="navbar-brand" href="index.html">Success !</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
@@ -151,64 +152,65 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	      		</li>
 			</ul>
 			<form class="navbar-form navbar-right">
-              <div style="color:white;padding:8px">欢迎！${userName}</div>
+              <div style="color:white;padding:8px">欢迎！${user.user_name}</div>
             </form>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
+					<ul class="nav" id="side-menu">
 
-                      <li>
-                            <a href="#"><i class="fa fa-laptop nav_icon"></i>学生管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="grids.html">所有学生</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>作业管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="graphs.html">添加作业</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">管理作业</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-table nav_icon"></i>查看作业<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="basic_tables.html">全部作业</a>
-                                </li>
+						<li>
+							<a href="#"><i class="fa fa-laptop nav_icon"></i>学生管理<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
 								<li>
-                                    <a href="basic_tables.html">选择类</a>
-                                </li>
-                                <li>
-                                    <a href="basic_tables.html">判断类</a>
-                                </li>
-                                <li>
-                                    <a href="basic_tables.html">多选类</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Product By Yggdrasil<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="media.html">我的信息</a>
-                                </li>
-                                <li>
-                                    <a href="Login.jsp">项目感想</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
+									<a href="/ManageAllUsers">所有学生</a>
+								</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-indent nav_icon"></i>作业管理<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="/AddTask">添加作业</a>
+								</li>
+								<li>
+									<a href="/ManageAllTasks">管理作业</a>
+								</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-table nav_icon"></i>查看作业<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="/ManageAllSubject">全部题目</a>
+								</li>
+								<li>
+									<a href="/ManageAllSubjectOfA_Type?check_type_id=0">选择类</a>
+								</li>
+								<li>
+									<a href="/ManageAllSubjectOfA_Type?check_type_id=1">判断类</a>
+								</li>
+								<li>
+									<a href="/ManageAllSubjectOfA_Type?check_type_id=2">多选类</a>
+								</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Product By Yggdrasil<span
+									class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="media.html">我的信息</a>
+								</li>
+								<li>
+									<a href="Login.jsp">项目感想</a>
+								</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+					</ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -221,16 +223,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         	<div class="Compose-Message">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>Danger</h4>
+                        <h4>Success</h4>
                     </div>
                     <div class="panel-body">
                     <br><br><br>
-                        <div class="alert alert-danger move3"  style=" font-size:40px; text-align:center; height:220px" >
-                             <div class="move2" style=" margin-top:66px;"><b>哦嚯！</b>出了一些问题</div>
+                        <div class="alert alert-info move3"  style=" font-size:40px; text-align:center; height:220px" >
+                             <div class="move2" style=" margin-top:66px;">${successInfo}</div>
                         </div><br>
                         
                         <div style=" text-align:center;"><br><br><br>
-                        <button type="button" class="btn btn_5 btn-lg btn-danger">  &nbsp; 返回主页面&nbsp;&nbsp;&nbsp;   </button>&nbsp;
+                        <button onclick='window.location="${user.user_last_view_page}"' type="button" class="btn btn_5 btn-lg btn-danger">  &nbsp; 返回&nbsp;&nbsp;&nbsp;   </button>&nbsp;
                       </div>
                     </div>
                  </div>

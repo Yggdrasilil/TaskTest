@@ -34,14 +34,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="js/rickshaw.js"></script>
     <style>
         .move1{
-            -webkit-animation:mv1 3s;
+            -webkit-animation:mv1 2s;
         }
         @keyframes mv1{
             0%{opacity: 0}
             100%{opacity: 1}
         }
         .move2{
-            -webkit-animation:mv2 3s;
+            -webkit-animation:mv2 2s;
         }
         @keyframes mv2{
             0%{background-color: white}
@@ -61,7 +61,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Content Manage System</a>
+            <a class="navbar-brand" href="/ManageAllTasks">Content Manage System</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-nav navbar-right">
@@ -155,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </li>
         </ul>
         <form class="navbar-form navbar-right">
-            <div style="color:white;padding:8px">${successInfo}</div>
+            <div style="color:white;padding:8px">欢迎!${user.user_name}</div>
         </form>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -165,7 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="#"><i class="fa fa-laptop nav_icon"></i>学生管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="grids.html">所有学生</a>
+                                <a href="/ManageAllUsers">所有学生</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -174,10 +174,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="#"><i class="fa fa-indent nav_icon"></i>作业管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="graphs.html">添加作业</a>
+                                <a href="/AddTask">添加作业</a>
                             </li>
                             <li>
-                                <a href="typography.html">管理作业</a>
+                                <a href="/ManageAllTasks">管理作业</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -186,16 +186,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="#"><i class="fa fa-table nav_icon"></i>查看作业<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="basic_tables.html">全部作业</a>
+                                <a href="/ManageAllSubject">全部题目</a>
                             </li>
                             <li>
-                                <a href="basic_tables.html">选择类</a>
+                                <a href="/ManageAllSubjectOfA_Type?check_type_id=0">选择类</a>
                             </li>
                             <li>
-                                <a href="basic_tables.html">判断类</a>
+                                <a href="/ManageAllSubjectOfA_Type?check_type_id=1">判断类</a>
                             </li>
                             <li>
-                                <a href="basic_tables.html">多选类</a>
+                                <a href="/ManageAllSubjectOfA_Type?check_type_id=2">多选类</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
