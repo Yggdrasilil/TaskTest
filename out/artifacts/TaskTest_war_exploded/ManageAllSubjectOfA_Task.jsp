@@ -254,14 +254,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="panel panel-warning move1" style="border-color:
 
                                 /*实现颜色*/
-                        <c:if test="${c.subject_type%3 == 0 }">#F27A7C</c:if>
-                        <c:if test="${c.subject_type%3 == 1 }"></c:if>
-                        <c:if test="${c.subject_type%3 == 2 }">#6DD3F3</c:if>
+                        <c:if test="${c.subject_type%3 == 0 }">#6DD3F3</c:if>
+                        <c:if test="${c.subject_type%3 == 1 }">#F27A7C</c:if>
+                        <c:if test="${c.subject_type%3 == 2 }"></c:if>
                                 ">
                             <div class="panel-heading move2" style="background-color:
-                            <c:if test="${c.subject_type%3 == 0 }">#F27A7C</c:if>
-                                <c:if test="${c.subject_type%3 == 1 }"></c:if>
-                            <c:if test="${c.subject_type%3 == 2 }">#6DD3F3</c:if>
+                            <c:if test="${c.subject_type%3 == 0 }">#6DD3F3</c:if>
+                                <c:if test="${c.subject_type%3 == 1 }">#F27A7C</c:if>
+                            <c:if test="${c.subject_type%3 == 2 }"></c:if>
                             ">
                                 <h2>${c.subject_title}</h2>
                                 <h5 style="float:right; margin-top:-14px; margin-right:13px"><a href="#!" class="secondary-content" style="color: #6D6D6D"> 修改题目 </a></h5>
@@ -320,7 +320,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                            <div style=" text-align:center;"><br>
                                                <h3 class="h3">你可以:</h3><br>
                                                <button onclick='window.location="/ManageAllSubjectOfA_Task?check_task_id=${check_task_id-1}"' type="button" class="btn btn_5 btn-lg btn-danger">  &nbsp; 返回上个作业&nbsp;&nbsp;&nbsp;   </button>&nbsp;
-                                               <button type="button" class="btn btn_5 btn-lg btn-primary">  &nbsp; 添加作业&nbsp;&nbsp;&nbsp;   </button>&nbsp;
+                                               <button onclick='window.location="/AddTask"' type="button" class="btn btn_5 btn-lg btn-primary">  &nbsp; 添加作业&nbsp;&nbsp;&nbsp;   </button>&nbsp;
                                            </div>
                                        </div>
                                    </div>
@@ -345,7 +345,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div style=" text-align:center;"><br>
                                     <h3 class="h3">你可以:</h3><br>
                                     <button onclick='window.location="/ManageAllSubjectOfA_Task?check_task_id=${check_task_id-1}"' type="button" class="btn btn_5 btn-lg btn-danger">  &nbsp; 返回上个作业&nbsp;&nbsp;&nbsp;   </button>&nbsp;
-                                    <button type="button" class="btn btn_5 btn-lg btn-primary">  &nbsp; 添加题目&nbsp;&nbsp;&nbsp;   </button>&nbsp;
+                                    <button onclick=window.location="/AddSubject?task_id=${check_task_id}&&subject_id=${task.count_subject}" type="button" class="btn btn_5 btn-lg btn-primary" > 添加题目  </button>
                                     <button onclick='window.location="/ManageAllSubjectOfA_Task?check_task_id=${check_task_id+1}"' type="button" class="btn btn_5 btn-lg btn-danger">  &nbsp; 查看下个作业&nbsp;&nbsp;&nbsp;   </button>&nbsp;
 
                                 </div>
@@ -357,9 +357,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                        <c:if test="${!empty task.subject}">
                            <div align="center">
+
                                <c:if test="${check_task_id != 1}">
                                    <button onclick=window.location="/ManageAllSubjectOfA_Task?check_task_id=${check_task_id-1}" type="button" class="btn btn_5 btn-lg btn-primary" style="margin-right:30px;"> 上个作业 </button>
                                </c:if>
+                               <button onclick=window.location="/AddSubject?task_id=${check_task_id}&&subject_id=${task.count_subject}" type="button" class="btn btn_5 btn-lg btn-primary" style="margin-right:30px;"> 添加题目  </button>
                                <button onclick=window.location="/ManageAllSubjectOfA_Task?check_task_id=${check_task_id+1}" type="button" class="btn btn_5 btn-lg btn-primary" style="margin-right:30px;"> 下个作业 </button>
                            </div>
                        </c:if>

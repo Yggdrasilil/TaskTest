@@ -22,7 +22,7 @@ public class Login extends HttpServlet{
         String target;
         boolean isLog = false;
         boolean isRoot;
-        User user = null;
+        User user;
         HttpSession httpSession = req.getSession();
 
         /**
@@ -65,17 +65,17 @@ public class Login extends HttpServlet{
             preparedStatement.setString(1, temp_id);
             preparedStatement.setString(2, temp_password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            //resultSet.next();
+
             /**
              * 若有,根据USER_ID新建用户对象
              */
             if(resultSet.next()){
                 user = new User(temp_id);
                 httpSession.setAttribute("isLog", true);
+                httpSession.setAttribute("user", user);
             } else {
                 errorInfo = "用户名或密码错误";
             }
-            httpSession.setAttribute("user", user);
         }catch (Exception e){
             e.printStackTrace();
             errorInfo = "查询数据库失败";

@@ -265,7 +265,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <td>${c.count_score}</td>
                                     <td>${c.add_date}</td>
                                     <td><a href="#!" class="secondary-content">修改作业</a>
-                                        <a href="#!" class="secondary-content">删除</a>
+                                        <a href="/DeleteTask?delete_task_id=${c.task_id}" class="secondary-content">删除</a>
                                         <a href="/ManageAllSubjectOfA_Task?check_task_id=${c.task_id}" class="secondary-content">查看题目</a>
                                     </td>
                                 </tr>

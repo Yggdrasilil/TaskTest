@@ -20,6 +20,7 @@ import java.util.Date;
 public class ManageAllTasks extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         doPost(req, resp);
     }
 
@@ -37,42 +38,45 @@ public class ManageAllTasks extends HttpServlet{
         /**
          * 判断是否登陆
          */
-        target = check.checkRootLog(httpSession,target);
+        if(check.checkLog(httpSession)) {
+            if(check.checkRoot(httpSession)) {
+                try {
+                    /**
+                     * 连接数据库
+                     */
+                    connection = myHelp.getConnectionToDB();
 
-        try{
-            /**
-             * 连接数据库
-             */
-            connection = myHelp.getConnectionToDB();
-
-            /**
-             * 通过TASK表统计数目创建TASK对象数组
-             */
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) c FROM Task");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            task = new Task[resultSet.getInt("c")];
-            for( int i = 0 ; i < task.length ; i++){
-                task[i] = new Task(i+1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorInfo = "查询数据库失败";
-            target = "/ManageError.jsp";
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
+                    /**
+                     * 通过TASK表统计数目创建TASK对象数组
+                     */
+                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) c FROM Task");
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    resultSet.next();
+                    task = new Task[resultSet.getInt("c")];
+                    for (int i = 0; i < task.length; i++) {
+                        task[i] = new Task(i + 1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    errorInfo = "查询数据库失败";
+                    target = "/ManageError.jsp";
+                } finally {
+                    try {
+                        if (connection != null) {
+                            connection.close();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if(httpSession.getAttribute("user") != null) {
-            user = (User) httpSession.getAttribute("user");
-            user.setUser_lase_view_date();
-            user.setUser_last_view_page("/ManageAllTasks");
-        }
+                if (httpSession.getAttribute("user") != null) {
+                    user = (User) httpSession.getAttribute("user");
+                    user.setUser_lase_view_date();
+                    user.setUser_last_view_page("/ManageAllTasks");
+                }
+            } else target = "/CheckTasks.jsp";
+        } else target = "/Login.jsp";
+
         req.setAttribute("errorInfo", errorInfo);
         req.setAttribute("task", task);
         ServletContext ctx = getServletContext();

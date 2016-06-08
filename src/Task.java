@@ -185,5 +185,4 @@ public class Task {
         this.count_score = count_scroe;
     }
 
-
 }

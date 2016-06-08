@@ -31,49 +31,65 @@ public class DeleteSubject extends HttpServlet{
         /**
          * 判断是否登陆
          */
-        target = check.checkRootLog(httpSession, target);
+        if(check.checkLog(httpSession)) {
+            if(check.checkRoot(httpSession)) {
+                /**
+                 * 执行删除
+                 */
+                int delete_subject_id = Integer.valueOf(req.getParameter("delete_subject_id"));
+                int delete_task_id = Integer.valueOf(req.getParameter("delete_task_id"));
+                try {
 
-        /**
-         * 执行删除
-         */
-        int delete_subject_id = Integer.valueOf(req.getParameter("delete_subject_id"));
-        int delete_task_id = Integer.valueOf(req.getParameter("delete_task_id"));
-        try{
+                    /**
+                     * 首先删除与之对应的所有CHOICE
+                     */
+                    connection = myHelp.getConnectionToDB();
+                    PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Choice WHERE subject_id = ? AND task_id = ?");
+                    preparedStatement.setInt(1, delete_subject_id);
+                    preparedStatement.setInt(2, delete_task_id);
+                    preparedStatement.executeUpdate();
 
-            /**
-             * 首先删除与之对应的所有CHOICE
-             */
-            connection = myHelp.getConnectionToDB();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Choice WHERE subject_id = ? AND task_id = ?");
-            preparedStatement.setInt(1, delete_subject_id);
-            preparedStatement.setInt(2, delete_task_id);
-            preparedStatement.executeUpdate();
-            /**
-             * 删除该SUBJECT
-             */
-            preparedStatement = connection.prepareStatement("DELETE FROM Subject WHERE subject_id = ? AND task_id = ?");
-            preparedStatement.setInt(1, delete_subject_id);
-            preparedStatement.setInt(2, delete_task_id);
-            preparedStatement.executeUpdate();
-            /**
-             * 所有比删除SUBJECT_ID大的SUBJECT_ID自减1
-             */
-            preparedStatement = connection.prepareStatement("UPDATE Subject SET subject_id = subject_id-1 WHERE subject_id > ?");
-            preparedStatement.setInt(1, delete_subject_id);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            errorInfo = "删除失败!";
-            target = "/ManageError.jsp";
-            e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
+
+                    /**
+                     * 在CHOICE中所有比删除SUBJECT_ID大的SUBJECT_ID自减1
+                     */
+                    preparedStatement = connection.prepareStatement("UPDATE Choice SET subject_id = subject_id-1 WHERE subject_id > ? AND task_id = ?");
+                    preparedStatement.setInt(1, delete_subject_id);
+                    preparedStatement.setInt(2, delete_task_id);
+                    preparedStatement.executeUpdate();
+
+                    /**
+                     * 删除该SUBJECT
+                     */
+                    preparedStatement = connection.prepareStatement("DELETE FROM Subject WHERE subject_id = ? AND task_id = ?");
+                    preparedStatement.setInt(1, delete_subject_id);
+                    preparedStatement.setInt(2, delete_task_id);
+                    preparedStatement.executeUpdate();
+
+                    /**
+                     * 在SUBJECT中所有比删除SUBJECT_ID大的SUBJECT_ID自减1
+                     */
+                    preparedStatement = connection.prepareStatement("UPDATE Subject SET subject_id = subject_id-1 WHERE subject_id > ? AND task_id = ?");
+                    preparedStatement.setInt(1, delete_subject_id);
+                    preparedStatement.setInt(2, delete_task_id);
+                    preparedStatement.executeUpdate();
+
+
+                } catch (Exception e) {
+                    errorInfo = "删除失败!";
+                    target = "/ManageError.jsp";
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (connection != null) {
+                            connection.close();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+            } else target = "/CheckTasks.jsp";
+        } else target = "/Login.jsp";
         req.setAttribute("errorInfo", errorInfo);
         req.setAttribute("successInfo", successInfo);
         if(httpSession.getAttribute("user") != null){

@@ -120,4 +120,41 @@ public class Subject {
     public void setSubject_type(int topic_type) {
         this.subject_type = topic_type;
     }
+
+    public boolean addToDB(){
+        MyHelp myHelp = new MyHelp();
+        Connection connection = null;
+        try{
+            /**
+             * 添加该SUBJECT入DB
+             */
+            connection = myHelp.getConnectionToDB();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Subject VALUES(?,?,?,?,?)");
+            preparedStatement.setInt(1, task_id);
+            preparedStatement.setInt(2, subject_id);
+            preparedStatement.setString(3, subject_title);
+            preparedStatement.setString(4, subject_content);
+            preparedStatement.setInt(5, subject_type);
+            preparedStatement.executeUpdate();
+            /**
+             * 添加该SUBJECT对应的CHOICE入DB
+             */
+            for(int i = 0 ; choice[i] != null ; i++){
+                choice[i].addToDB();
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try{
+                if(connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

@@ -99,4 +99,31 @@ public class Choice {
     public void setChoice_isTrue(int choice_isTrue) {
         this.choice_isTrue = choice_isTrue;
     }
+
+    public boolean addToDB(){
+        MyHelp myHelp = new MyHelp();
+        Connection connection = null;
+        try{
+            connection = myHelp.getConnectionToDB();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Choice VALUES(?,?,?,?,?)");
+            preparedStatement.setInt(1, choice_id);
+            preparedStatement.setInt(2, subject_id);
+            preparedStatement.setInt(3, task_id);
+            preparedStatement.setString(4, choice_content);
+            preparedStatement.setInt(5, choice_isTrue);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if(connection != null){
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

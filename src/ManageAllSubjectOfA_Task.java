@@ -25,30 +25,32 @@ public class ManageAllSubjectOfA_Task extends HttpServlet{
         HttpSession httpSession = req.getSession();
 
         /**
-         * 判断是否登陆,已经登陆的管理员进入ManageAllSubject页面,已经登陆的学生进入CheckTasks页面
+         * 判断是否登陆,是否好是管理员
          */
-        target = check.checkRootLog(httpSession, target);
-
-        /**
-         * 得到要查看的作业id
-         */
-        int check_task_id = Integer.valueOf(req.getParameter("check_task_id"));
-
-
-        /**
-         * 创建TASK对象,获得该TASK的所有SUBJECT和CHOICE
-         */
-        task = new Task(check_task_id);
+        if(check.checkLog(httpSession)) {
+            if (check.checkRoot(httpSession)) {
+                /**
+                 * 得到要查看的作业id
+                 */
+                int check_task_id = Integer.valueOf(req.getParameter("check_task_id"));
 
 
-        req.setAttribute("check_task_id",check_task_id);
-        req.setAttribute("errorInfo", errorInfo);
-        req.setAttribute("task", task);
-        if(httpSession.getAttribute("user") != null) {
-            User user = (User) httpSession.getAttribute("user");
-            user.setUser_last_view_page("/ManageAllSubjectOfA_Task?check_task_id="+check_task_id);
-            user.setUser_lase_view_date();
-        }
+                /**
+                 * 创建TASK对象,获得该TASK的所有SUBJECT和CHOICE
+                 */
+                task = new Task(check_task_id);
+
+
+                req.setAttribute("check_task_id", check_task_id);
+                req.setAttribute("errorInfo", errorInfo);
+                req.setAttribute("task", task);
+                if (httpSession.getAttribute("user") != null) {
+                    User user = (User) httpSession.getAttribute("user");
+                    user.setUser_last_view_page("/ManageAllSubjectOfA_Task?check_task_id=" + check_task_id);
+                    user.setUser_lase_view_date();
+                }
+            } else target = "/CheckTasks.jsp";
+        } else target = "/Login.jsp";
         ServletContext ctx = getServletContext();
         RequestDispatcher dp = ctx.getRequestDispatcher(target);
         dp.forward(req,resp);
