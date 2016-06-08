@@ -19,27 +19,31 @@ import java.sql.ResultSet;
 public class Login extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String target;
+        String target = "";
         boolean isLog = false;
+<<<<<<< HEAD
         boolean isRoot;
         User user;
+=======
+        boolean isRoot = false;
+>>>>>>> parent of f1d197e... Add some function
         HttpSession httpSession = req.getSession();
 
         /**
          * 判断是否登陆
          */
         if(httpSession.getAttribute("isLog") != null)
-            isLog = (boolean)httpSession.getAttribute("isLog");
-            if (isLog) {
-                user = (User)httpSession.getAttribute("user");
-                isRoot = user.getUser_isRoot();
-                target = "/CheckTasks";
-                if (isRoot) {
-                    target = "/ManageAllTasks";
-                }
-            } else {
-                target = "/Login.jsp";
+            isLog = (boolean) httpSession.getAttribute("isLog");
+        if(httpSession.getAttribute("isRoot") != null)
+            isRoot = (boolean) httpSession.getAttribute("isRoot");
+        if(isLog){
+            target = "/CheckTasks";
+            if(isRoot){
+                target = "/ManageAllTasks";
             }
+        } else {
+            target = "/Login.jsp";
+        }
         ServletContext ctx = getServletContext();
         RequestDispatcher dp = ctx.getRequestDispatcher(target);
         dp.forward(req,resp);
@@ -49,11 +53,14 @@ public class Login extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("GBK");
         String target = "";
-        User user = null;
+        boolean isRoot = false;
+        boolean isLog = false;
+        User user = new User();
         MyHelp myHelp = new MyHelp();
         Connection collection = null;
         String errorInfo = "";
-        HttpSession httpSession = req.getSession();
+        String successInfo = "欢迎!";
+
         /**
          * 从数据库查询用户数据
          */
@@ -65,6 +72,7 @@ public class Login extends HttpServlet{
             preparedStatement.setString(1, temp_id);
             preparedStatement.setString(2, temp_password);
             ResultSet resultSet = preparedStatement.executeQuery();
+<<<<<<< HEAD
 
             /**
              * 若有,根据USER_ID新建用户对象
@@ -76,6 +84,23 @@ public class Login extends HttpServlet{
             } else {
                 errorInfo = "用户名或密码错误";
             }
+=======
+            //resultSet.next();
+            if(resultSet.next()){
+                isLog = true;
+                if(0 == resultSet.getInt("user_limit")){
+                    isRoot = true;
+                    successInfo += "管理员,";
+                }
+                successInfo += resultSet.getString("user_name");
+            } else {
+                errorInfo = "用户名或密码错误";
+            }
+            HttpSession httpSession = req.getSession();
+            httpSession.setAttribute("isLog", isLog);
+            httpSession.setAttribute("isRoot", isRoot);
+            httpSession.setAttribute("successInfo", successInfo);
+>>>>>>> parent of f1d197e... Add some function
         }catch (Exception e){
             e.printStackTrace();
             errorInfo = "查询数据库失败";

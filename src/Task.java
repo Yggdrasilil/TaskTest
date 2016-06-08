@@ -35,12 +35,11 @@ public class Task {
             preparedStatement.setInt(1,task_id);
             ResultSet resultSet ;
             resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
-                this.task_id = resultSet.getInt("task_id");
-                this.task_name = resultSet.getString("task_name");
-                this.add_date = resultSet.getString("add_date");
-                this.add_user = resultSet.getString("add_user");
-            }
+            resultSet.next();
+            task_name = resultSet.getString("task_name");
+            add_date = resultSet.getString("add_date");
+            add_user = resultSet.getString("add_user");
+
 
 
             /**
@@ -50,7 +49,6 @@ public class Task {
             preparedStatement.setInt(1,task_id);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
-
             subject = new Subject[resultSet.getInt("c")];
             for(int i = 0; i < subject.length ; i++){
                 subject[i] = new Subject(task_id , i+1);
@@ -68,6 +66,7 @@ public class Task {
             }
         }
 
+        this.task_id = task_id;
     }
 
     /**

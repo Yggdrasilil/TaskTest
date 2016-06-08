@@ -33,13 +33,9 @@ public class Choice {
             preparedStatement.setInt(2,subject_id);
             preparedStatement.setInt(3,choice_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
-                this.task_id = resultSet.getInt("task_id");
-                this.subject_id = resultSet.getInt("subject_id");
-                this.choice_id = resultSet.getInt("choice_id");
-                this.choice_content = resultSet.getString("choice_content");
-                this.choice_isTrue = resultSet.getInt("choice_isTrue");
-            }
+            resultSet.next();
+            choice_content = resultSet.getString("choice_content");
+            choice_isTrue = resultSet.getInt("choice_isTrue");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -51,7 +47,9 @@ public class Choice {
                 e.printStackTrace();
             }
         }
-
+        this.task_id = task_id;
+        this.subject_id = subject_id;
+        this.choice_id = choice_id;
     }
 
     /**
