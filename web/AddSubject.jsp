@@ -133,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </li>
         </ul>
         <form class="navbar-form navbar-right">
-            <div style="color:white;padding:8px">欢迎${user.user_name}</div>
+            <div style="color:white;padding:8px">欢迎!${user.user_name}</div>
         </form>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -143,7 +143,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="#"><i class="fa fa-laptop nav_icon"></i>学生管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="grids.html">所有学生</a>
+                                <a href="/ManageAllUsers">所有学生</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -152,10 +152,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="#"><i class="fa fa-indent nav_icon"></i>作业管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="graphs.html">添加作业</a>
+                                <a href="/AddTask">添加作业</a>
                             </li>
                             <li>
-                                <a href="typography.html">管理作业</a>
+                                <a href="/ManageAllTasks">管理作业</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -164,28 +164,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="#"><i class="fa fa-table nav_icon"></i>查看作业<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="basic_tables.html">全部作业</a>
+                                <a href="/ManageAllSubject">全部题目</a>
                             </li>
                             <li>
-                                <a href="basic_tables.html">选择类</a>
+                                <a href="/ManageAllSubjectOfA_Type?check_subject_type=1">选择类</a>
                             </li>
                             <li>
-                                <a href="basic_tables.html">判断类</a>
+                                <a href="/ManageAllSubjectOfA_Type?check_subject_type=2">判断类</a>
                             </li>
                             <li>
-                                <a href="basic_tables.html">多选类</a>
+                                <a href="/ManageAllSubjectOfA_Type?check_subject_type=3">多选类</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Product By Yggdrasil<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Product By Yggdrasil<span
+                                class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="media.html">我的信息</a>
                             </li>
                             <li>
-                                <a href="login.html">项目感想</a>
+                                <a href="Login.jsp">项目感想</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -279,7 +280,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         </tbody>
                                     </table>
                                     <input value="确定"  type="submit" class="btn btn-success warning_2" style="background-color:#ffc107 ; border-color:#ffc107 ; font-size: 23px;"></input>&nbsp;&nbsp;
-                                <button onclick='window.location=${user.user_last_view_page}' type="button" class="btn btn_5 btn-lg btn-default">取消</button>
+                                <button onclick='window.location="${user.user_last_view_page}"' type="button" class="btn btn_5 btn-lg btn-default">取消</button>
                             </form>
 
                                 <br>

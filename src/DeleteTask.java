@@ -35,14 +35,29 @@ public class DeleteTask extends HttpServlet{
                 /**
                  * 执行删除
                  */
+
                 int delete_task_id = Integer.valueOf(req.getParameter("delete_task_id"));
                 try {
+                    connection = myHelp.getConnectionToDB();
+                    PreparedStatement preparedStatement;
+                    /**
+                     * 删除SCORE中的对应TASK数据
+                     */
+                    preparedStatement = connection.prepareStatement("DELETE FROM Score WHERE task_id = ?");
+                    preparedStatement.setInt(1, delete_task_id);
+                    preparedStatement.executeUpdate();
 
                     /**
-                     * 首先删除与之对应的所有SUBJECT
+                     * 在SCORE中所有比要删除TASK_ID大的TASK_ID自减1
                      */
-                    connection = myHelp.getConnectionToDB();
-                    PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Subject WHERE task_id = ?");
+                    preparedStatement = connection.prepareStatement("UPDATE Score SET task_id = task_id-1 WHERE task_id > ?");
+                    preparedStatement.setInt(1, delete_task_id);
+                    preparedStatement.executeUpdate();
+
+                    /**
+                     * 删除与之对应的所有SUBJECT
+                     */
+                    preparedStatement = connection.prepareStatement("DELETE FROM Subject WHERE task_id = ?");
                     preparedStatement.setInt(1, delete_task_id);
                     preparedStatement.executeUpdate();
 
