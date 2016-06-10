@@ -33,8 +33,9 @@ public class DeleteSubject extends HttpServlet{
          */
         if(check.checkLog(httpSession)) {
             if(check.checkRoot(httpSession)) {
+
                 /**
-                 * 执行删除
+                 * 得到要删除的SUBJECT_ID和TASK_ID
                  */
                 int delete_subject_id = Integer.valueOf(req.getParameter("delete_subject_id"));
                 int delete_task_id = Integer.valueOf(req.getParameter("delete_task_id"));

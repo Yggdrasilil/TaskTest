@@ -59,7 +59,7 @@ public class Register extends HttpServlet {
                     && myHelp.checkOtherLength(user.getUser_id())
                     && user.getUser_sex() != null){
                 httpSession.setAttribute("isLog", true);
-                target = "/CheckTasks.html";
+                target = "/CheckTasks.jsp";
                 try {
 
                     /**

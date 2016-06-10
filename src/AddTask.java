@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,6 +47,7 @@ public class AddTask extends HttpServlet{
         String target = "/ManageSuccess.jsp";
         String successInfo = "添加成功";
         String task_name = req.getParameter("task_name");
+        HttpSession httpSession = req.getSession();
 
         /**
          * 检查登陆
@@ -53,7 +55,7 @@ public class AddTask extends HttpServlet{
         if(check.checkLog(req.getSession())) {
             if (check.checkRoot(req.getSession())) {
                 try {
-                    User user= (User)req.getAttribute("user");
+                    User user= (User)httpSession.getAttribute("user");
 
                     /**
                      * 得到TASK总行数

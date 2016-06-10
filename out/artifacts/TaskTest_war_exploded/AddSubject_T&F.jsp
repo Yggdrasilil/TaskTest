@@ -124,60 +124,61 @@
 	        		</ul>
 	      		</li>
 			</ul>
-			<form class="navbar-form navbar-right">
-              <div style="color:white;padding:8px">欢迎${user.user_name}</div>
+            <form class="navbar-form navbar-right">
+                <div style="color:white;padding:8px">欢迎!${user.user_name}</div>
             </form>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 
-                      <li>
-                            <a href="file:///Users/Yggdrasil/Desktop/1/AddSubject_T&amp;F.html#"><i class="fa fa-laptop nav_icon"></i>学生管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#"><i class="fa fa-laptop nav_icon"></i>学生管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/grids.html">所有学生</a>
+                                    <a href="/ManageAllUsers">所有学生</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="file:///Users/Yggdrasil/Desktop/1/AddSubject_T&amp;F.html#"><i class="fa fa-indent nav_icon"></i>作业管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
+                            <a href="#"><i class="fa fa-indent nav_icon"></i>作业管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/graphs.html">添加作业</a>
+                                    <a href="/AddTask">添加作业</a>
                                 </li>
                                 <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/typography.html">管理作业</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="file:///Users/Yggdrasil/Desktop/1/AddSubject_T&amp;F.html#"><i class="fa fa-table nav_icon"></i>查看作业<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/basic_tables.html">全部作业</a>
-                                </li>
-								<li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/basic_tables.html">选择类</a>
-                                </li>
-                                <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/basic_tables.html">判断类</a>
-                                </li>
-                                <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/basic_tables.html">多选类</a>
+                                    <a href="/ManageAllTasks">管理作业</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="file:///Users/Yggdrasil/Desktop/1/AddSubject_T&amp;F.html#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Product By Yggdrasil<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
+                            <a href="#"><i class="fa fa-table nav_icon"></i>查看作业<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/media.html">我的信息</a>
+                                    <a href="/ManageAllSubject">全部题目</a>
                                 </li>
                                 <li>
-                                    <a href="file:///Users/Yggdrasil/Desktop/1/login.html">项目感想</a>
+                                    <a href="/ManageAllSubjectOfA_Type?check_subject_type=1">选择类</a>
+                                </li>
+                                <li>
+                                    <a href="/ManageAllSubjectOfA_Type?check_subject_type=2">判断类</a>
+                                </li>
+                                <li>
+                                    <a href="/ManageAllSubjectOfA_Type?check_subject_type=3">多选类</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Product By Yggdrasil<span
+                                    class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="media.html">我的信息</a>
+                                </li>
+                                <li>
+                                    <a href="Login.jsp">项目感想</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Iterator;
 
 /**
  * Created by Yggdrasil on 16/6/7.
@@ -107,28 +105,32 @@ public class AddSubject extends HttpServlet{
                         loopVar++;
                     }
 
-                    /**
-                     * 循环遍历得到多选选项真假
-                     */
-                    if(subject_type == 3) {
-                        String[] choice_isTrue = req.getParameterValues("choice_isTrue");
-                        for (int i = 0; i < choice_isTrue.length; i++) {
-                            subject[subject_num].choice[Integer.valueOf(choice_isTrue[i]) - 1].setChoice_isTrue(1);
+
+                    if(req.getParameterValues("choice_isTrue") != null) {
+
+                        /**
+                         * 循环遍历得到多选选项真假
+                         */
+                        if (subject_type == 3) {
+                            String[] choice_isTrue = req.getParameterValues("choice_isTrue");
+                            for (int i = 0; i < choice_isTrue.length; i++) {
+                                subject[subject_num].choice[Integer.valueOf(choice_isTrue[i]) - 1].setChoice_isTrue(1);
+                            }
                         }
-                    }
-                    /**
-                     * 得到单选选项真假
-                     */
-                    else if(subject_type == 1){
-                        int choice_isTrue = Integer.valueOf(req.getParameter("choice_isTrue"));
-                        subject[subject_num].choice[choice_isTrue].setChoice_isTrue(1);
-                    }
-                    /**
-                     * 得到判断真假
-                     */
-                    else {
-                        int choice_isTrue = Integer.valueOf(req.getParameter("choice_isTrue"));
-                        subject[subject_num].choice[choice_isTrue].setChoice_isTrue(1);
+                        /**
+                         * 得到单选选项真假
+                         */
+                        else if (subject_type == 1) {
+                            int choice_isTrue = Integer.valueOf(req.getParameter("choice_isTrue"));
+                            subject[subject_num].choice[choice_isTrue - 1 ].setChoice_isTrue(1);
+                        }
+                        /**
+                         * 得到判断真假
+                         */
+                        else {
+                            int choice_isTrue = Integer.valueOf(req.getParameter("choice_isTrue"));
+                            subject[subject_num].choice[choice_isTrue].setChoice_isTrue(1);
+                        }
                     }
                     /**
                      * SUBJECT对象数加1,SUBJECT_ID也加1,和SUBJECT一起传入SESSION

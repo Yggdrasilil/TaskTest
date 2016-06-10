@@ -14,12 +14,12 @@ public class Task {
 
     private int task_id;
     private String task_name;
-    private int task_type;
     private String add_date;
     private String add_user;
 
     private int count_subject;
     private int count_score;
+    private float my_score;
 
     /**
      * 可以得到该TASK的所有题目和选项
@@ -35,11 +35,12 @@ public class Task {
             preparedStatement.setInt(1,task_id);
             ResultSet resultSet ;
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            task_name = resultSet.getString("task_name");
-            add_date = resultSet.getString("add_date");
-            add_user = resultSet.getString("add_user");
-
+            if(resultSet.next()) {
+                this.task_id = resultSet.getInt("task_id");
+                this.task_name = resultSet.getString("task_name");
+                this.add_date = resultSet.getString("add_date");
+                this.add_user = resultSet.getString("add_user");
+            }
 
 
             /**
@@ -49,6 +50,7 @@ public class Task {
             preparedStatement.setInt(1,task_id);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
+
             subject = new Subject[resultSet.getInt("c")];
             for(int i = 0; i < subject.length ; i++){
                 subject[i] = new Subject(task_id , i+1);
@@ -66,7 +68,6 @@ public class Task {
             }
         }
 
-        this.task_id = task_id;
     }
 
     /**
@@ -80,10 +81,6 @@ public class Task {
 
     public String getTask_name() {
         return task_name;
-    }
-
-    public int getTask_type() {
-        return task_type;
     }
 
     public String getAdd_date() {
@@ -151,6 +148,34 @@ public class Task {
         this.count_score = count_score;
     }
 
+    public float getMy_score() {
+        return my_score;
+    }
+
+    public void setMy_score(String user_id) {
+        try {
+            connection = myHelp.getConnectionToDB();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Score WHERE user_id = ? AND task_id = ?");
+            preparedStatement.setString(1,user_id);
+            preparedStatement.setInt(2, task_id);
+            ResultSet resultSet ;
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                this.my_score = resultSet.getFloat("score");
+            }
+
+        } catch ( Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void setSubject(Subject[] subject) {
         this.subject = subject;
@@ -164,9 +189,6 @@ public class Task {
         this.task_name = task_name;
     }
 
-    public void setTask_type(int task_type) {
-        this.task_type = task_type;
-    }
 
     public void setAdd_date(String add_date) {
         this.add_date = add_date;
